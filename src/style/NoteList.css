@@ -1,0 +1,22 @@
+.App {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  display: flex;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.Note-list {
+  background-color: #cccccc;
+  flex: 1 1 auto;
+  overflow-y: ;
+}
+
+.Note-editor {
+  height: 100%;
+  flex: 0 1 70%;
+}
