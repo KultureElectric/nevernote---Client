@@ -12,7 +12,6 @@ class Dashboard extends Component {
           <NoteList />
         </div>
         <div className="Note-editor">
-          <h4 className="center">Editor</h4>
           <NoteEditor />
         </div>
       </div>
