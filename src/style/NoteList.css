@@ -13,10 +13,31 @@
 .Note-list {
   background-color: #cccccc;
   flex: 1 1 auto;
-  overflow-y: ;
+  overflow-y: scroll;
 }
 
 .Note-editor {
-  height: 100%;
   flex: 0 1 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Styling the Editor */
+
+div.DraftEditor-root {
+  flex: 1 0 auto;
+  overflow-y: scroll;
+  padding: 20px;
+}
+
+div.toolbar {
+  position: relative;
+  width: 80%;
+  text-align: right;
+  padding: 10px 20px;
+  margin: auto;
+}
+
+div.toolbar button {
+  margin: 4px;
 }
