@@ -1,14 +1,24 @@
 import React, { Component } from "react";
-import { Editor, EditorState, RichUtils } from "draft-js";
+import { connect } from "react-redux";
+import { Editor, RichUtils } from "draft-js";
 
 class NoteEditor extends Component {
   constructor(props) {
     super(props);
-    this.state = { editorState: EditorState.createEmpty() };
+
+    this.state = { editorState: this.props.contentState };
+
     this.onChange = editorState => this.setState({ editorState });
+
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
     this._onClick = this._onClick.bind(this);
   }
+
+  componentWillUnmount() {
+    const contentState = this.state.editorState.getCurrentContent();
+    // Perfect time to save note to server
+  }
+
   handleKeyCommand(command, editorState) {
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
@@ -17,11 +27,13 @@ class NoteEditor extends Component {
     }
     return "not-handled";
   }
+
   _onClick(e) {
     this.onChange(
       RichUtils.toggleInlineStyle(this.state.editorState, e.target.value)
     );
   }
+
   render() {
     const styles = ["BOLD", "UNDERLINE", "ITALIC", "CODE"];
     const buttons = styles.map(style => {
@@ -32,23 +44,25 @@ class NoteEditor extends Component {
           className="btn"
           onClick={this._onClick}
         >
-          {" "}
-          {style}{" "}
+          {style}
         </button>
       );
     });
     return (
-      <div>
-        {" "}
-        <div className="toolbar">{buttons}</div>{" "}
+      <div className="Note-editor-root">
+        <div className="toolbar">{buttons}</div>
         <Editor
           editorState={this.state.editorState}
           handleKeyCommand={this.handleKeyCommand}
           onChange={this.onChange}
-        />{" "}
+        />
       </div>
     );
   }
 }
 
-export default NoteEditor;
+const mapStateToProps = ({ contentState }) => {
+  return { contentState };
+};
+
+export default connect(mapStateToProps)(NoteEditor);
