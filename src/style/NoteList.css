@@ -24,10 +24,17 @@
 
 /* Styling the Editor */
 
+div.Note-editor-root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 div.DraftEditor-root {
-  flex: 1 0 auto;
   overflow-y: scroll;
   padding: 20px;
+  flex: 1 0 auto;
+  border: 2px solid black;
 }
 
 div.toolbar {
