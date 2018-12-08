@@ -1,1 +1,2 @@
 export const UPDATE_EDITOR_STATE = "UPDATE_EDITOR_STATE";
+export const FETCH_USER = "FETCH_USER";
