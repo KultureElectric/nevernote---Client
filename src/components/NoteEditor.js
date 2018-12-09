@@ -1,38 +1,26 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Editor, RichUtils } from "draft-js";
+import { Editor, EditorState, convertToRaw } from "draft-js";
+
+import * as actions from "../actions";
 
 class NoteEditor extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { editorState: this.props.contentState };
-
+    this.state = { editorState: EditorState.createEmpty() };
     this.onChange = editorState => this.setState({ editorState });
 
-    this.handleKeyCommand = this.handleKeyCommand.bind(this);
+    this.handleNoteSave = this.handleNoteSave.bind(this);
     this._onClick = this._onClick.bind(this);
   }
 
-  componentWillUnmount() {
+  handleNoteSave() {
     const contentState = this.state.editorState.getCurrentContent();
-    // Perfect time to save note to server
+    this.props.saveNote(convertToRaw(contentState));
   }
 
-  handleKeyCommand(command, editorState) {
-    const newState = RichUtils.handleKeyCommand(editorState, command);
-    if (newState) {
-      this.onChange(newState);
-      return "handled";
-    }
-    return "not-handled";
-  }
-
-  _onClick(e) {
-    this.onChange(
-      RichUtils.toggleInlineStyle(this.state.editorState, e.target.value)
-    );
-  }
+  _onClick(e) {}
 
   render() {
     const styles = ["BOLD", "UNDERLINE", "ITALIC", "CODE"];
@@ -51,18 +39,26 @@ class NoteEditor extends Component {
     return (
       <div className="Note-editor-root">
         <div className="toolbar">{buttons}</div>
-        <Editor
-          editorState={this.state.editorState}
-          handleKeyCommand={this.handleKeyCommand}
-          onChange={this.onChange}
-        />
+        <Editor editorState={this.state.editorState} onChange={this.onChange} />
+        <div className="fixed-action-btn">
+          <button
+            to="/surveys/new"
+            className="btn-floating btn-large red"
+            onClick={this.handleNoteSave}
+          >
+            <i className="material-icons">check</i>
+          </button>
+        </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ contentState }) => {
-  return { contentState };
+const mapStateToProps = ({ editorState }) => {
+  return { editorState };
 };
 
-export default connect(mapStateToProps)(NoteEditor);
+export default connect(
+  mapStateToProps,
+  actions
+)(NoteEditor);
