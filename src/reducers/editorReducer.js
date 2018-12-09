@@ -1,9 +1,10 @@
-import { EditorState } from "draft-js";
+import { UPDATE_EDITOR_STATE } from "../actions/types";
 
-const initialState = EditorState.createEmpty();
-
-export default function(state = initialState, action) {
+export default function(state = "", action) {
   switch (action.type) {
+    case UPDATE_EDITOR_STATE:
+      return action.payload;
+
     default:
       return state;
   }

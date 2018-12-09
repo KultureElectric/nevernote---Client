@@ -3,6 +3,6 @@ import editorReducer from "./editorReducer";
 import authReducer from "./authReducer";
 
 export default combineReducers({
-  contentState: editorReducer,
+  editorState: editorReducer,
   auth: authReducer
 });
