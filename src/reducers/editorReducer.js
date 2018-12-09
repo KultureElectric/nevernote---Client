@@ -1,8 +1,8 @@
-import { UPDATE_EDITOR_STATE } from "../actions/types";
+import { FETCH_NOTES } from "../actions/types";
 
-export default function(state = "", action) {
+export default function(state = {}, action) {
   switch (action.type) {
-    case UPDATE_EDITOR_STATE:
+    case FETCH_NOTES:
       return action.payload;
 
     default:
