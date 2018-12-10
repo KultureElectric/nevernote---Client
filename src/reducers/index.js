@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import editorReducer from "./editorReducer";
+import noteReducer from "./noteReducer";
 import authReducer from "./authReducer";
 
 export default combineReducers({
-  editorState: editorReducer,
+  notes: noteReducer,
   auth: authReducer
 });
