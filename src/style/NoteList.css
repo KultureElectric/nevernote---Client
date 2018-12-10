@@ -11,7 +11,6 @@
 }
 
 .Note-list {
-  background-color: #cccccc;
   flex: 1 1 auto;
   overflow-y: scroll;
 }
@@ -47,4 +46,8 @@ div.toolbar {
 
 div.toolbar button {
   margin: 4px;
+}
+
+.note-item {
+  background-color: #f8f8f8;
 }
