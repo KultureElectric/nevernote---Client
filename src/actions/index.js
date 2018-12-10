@@ -16,3 +16,11 @@ export const saveNote = contentState => async dispatch => {
     payload: res.data
   });
 };
+
+export const fetchNotes = () => async dispatch => {
+  const res = await axios.get("/api/notes");
+  dispatch({
+    type: FETCH_NOTES,
+    payload: res.data
+  });
+};
