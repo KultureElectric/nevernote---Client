@@ -7,11 +7,11 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="content">
-        <div className="Note-list">
-          <h4 className="center">All notes</h4>
+        <div className="Note-list-component">
+          <h4 className="center fixed">All notes</h4>
           <NoteList />
         </div>
-        <div className="Note-editor">
+        <div className="Note-editor-component">
           <NoteEditor />
         </div>
       </div>

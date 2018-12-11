@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Editor, EditorState, convertToRaw } from "draft-js";
+import { Editor, EditorState, convertToRaw, convertFromRaw } from "draft-js";
 
 import * as actions from "../actions";
 
@@ -13,6 +13,11 @@ class NoteEditor extends Component {
 
     this.handleNoteSave = this.handleNoteSave.bind(this);
     this._onClick = this._onClick.bind(this);
+  }
+
+  componentWillReceiveProps(p) {
+    const contentState = convertFromRaw(p.activeNote.body);
+    this.setState({ editorState: EditorState.createWithContent(contentState) });
   }
 
   handleNoteSave() {
@@ -39,7 +44,11 @@ class NoteEditor extends Component {
     return (
       <div className="Note-editor-root">
         <div className="toolbar">{buttons}</div>
-        <Editor editorState={this.state.editorState} onChange={this.onChange} />
+        <Editor
+          editorState={this.state.editorState}
+          onChange={this.onChange}
+          placeholder="Write something"
+        />
         <div className="fixed-action-btn">
           <button
             to="/surveys/new"
@@ -54,8 +63,8 @@ class NoteEditor extends Component {
   }
 }
 
-const mapStateToProps = ({ editorState }) => {
-  return { editorState };
+const mapStateToProps = ({ activeNote }) => {
+  return { activeNote };
 };
 
 export default connect(
