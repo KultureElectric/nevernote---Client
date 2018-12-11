@@ -11,7 +11,7 @@ class NoteList extends Component {
 
   handleNoteSelect(note) {
     // perfect time to get a note shown
-    console.log(note);
+    this.props.setCurrentNote(note);
   }
 
   renderNotes() {
@@ -32,7 +32,9 @@ class NoteList extends Component {
   }
 
   render() {
-    return <div className="card collection">{this.renderNotes()}</div>;
+    return (
+      <div className="Note-list card collection">{this.renderNotes()}</div>
+    );
   }
 }
 
