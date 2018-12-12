@@ -27,9 +27,9 @@ class NoteEditor extends Component {
 
   _onClick(e) {}
 
-  render() {
+  renderInlineStyleButtons() {
     const styles = ["BOLD", "UNDERLINE", "ITALIC", "CODE"];
-    const buttons = styles.map(style => {
+    return styles.map(style => {
       return (
         <button
           key={style}
@@ -41,9 +41,21 @@ class NoteEditor extends Component {
         </button>
       );
     });
+  }
+
+  renderContent() {
+    if (!this.props.activeNote) {
+      return (
+        <div className="show-on-start">
+          <h4>You have no note selected to work on currently</h4>
+          <h6>Either create one or select one</h6>
+        </div>
+      );
+    }
+
     return (
       <div className="Note-editor-root">
-        <div className="toolbar">{buttons}</div>
+        <div className="toolbar">{this.renderInlineStyleButtons()}</div>
         <Editor
           editorState={this.state.editorState}
           onChange={this.onChange}
@@ -51,7 +63,6 @@ class NoteEditor extends Component {
         />
         <div className="fixed-action-btn">
           <button
-            to="/surveys/new"
             className="btn-floating btn-large red"
             onClick={this.handleNoteSave}
           >
@@ -60,6 +71,10 @@ class NoteEditor extends Component {
         </div>
       </div>
     );
+  }
+
+  render() {
+    return <div className="Note-editor-root">{this.renderContent()}</div>;
   }
 }
 
