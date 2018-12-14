@@ -12,11 +12,19 @@ class NoteList extends Component {
   handleNoteSelect(note) {
     // perfect time to get a note shown
     this.props.setCurrentNote(note);
-    console.log(note);
   }
 
   renderNotes() {
     const { notes } = this.props;
+    if (notes) {
+      notes.sort((a, b) => {
+        const dateA = new Date(a.lastUpdated);
+        const dateB = new Date(b.lastUpdated);
+
+        return dateB - dateA;
+      });
+    }
+
     return _.map(notes, note => {
       return (
         <a
