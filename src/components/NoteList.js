@@ -11,7 +11,7 @@ class NoteList extends Component {
 
   handleNoteSelect(note) {
     // perfect time to get a note shown
-    this.props.setCurrentNote(note);
+    this.props.setCurrentNote(note.body);
   }
 
   renderNotes() {

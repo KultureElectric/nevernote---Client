@@ -16,7 +16,7 @@ class NoteEditor extends Component {
   }
 
   componentWillReceiveProps(p) {
-    const contentState = convertFromRaw(p.activeNote.body);
+    const contentState = convertFromRaw(p.activeNote);
     this.setState({ editorState: EditorState.createWithContent(contentState) });
   }
 
@@ -74,6 +74,9 @@ class NoteEditor extends Component {
   }
 
   render() {
+    // this.props.activeNote is only the editor body,
+    // date created and last updated aren't given because
+    // of simplification of current note select on note creation
     return <div className="Note-editor-root">{this.renderContent()}</div>;
   }
 }
