@@ -9,8 +9,12 @@ import * as actions from "../actions";
 
 class Dashboard extends Component {
   handleCreateNote() {
-    const freshContentState = EditorState.createEmpty().getCurrentContent();
-    this.props.saveNote(convertToRaw(freshContentState));
+    const freshContentState = convertToRaw(
+      EditorState.createEmpty().getCurrentContent()
+    );
+    this.props.saveNote(freshContentState);
+
+    this.props.setCurrentNote(freshContentState);
   }
 
   render() {
@@ -37,7 +41,11 @@ class Dashboard extends Component {
   }
 }
 
+const mapStateToProps = ({ activeNote }) => {
+  return { activeNote };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   actions
 )(Dashboard);
