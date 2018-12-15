@@ -31,3 +31,11 @@ export const setCurrentNote = note => dispatch => {
     payload: note
   });
 };
+
+export const deleteNote = note => async dispatch => {
+  const res = await axios.delete("/api/notes", { data: note });
+  dispatch({
+    type: FETCH_NOTES,
+    payload: res.data
+  });
+};
