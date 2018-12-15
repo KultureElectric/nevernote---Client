@@ -14,6 +14,10 @@ class NoteList extends Component {
     this.props.setCurrentNote(note.body);
   }
 
+  handleNoteDelete(note) {
+    this.props.deleteNote(note);
+  }
+
   renderNotes() {
     const { notes } = this.props;
     if (notes) {
@@ -27,15 +31,22 @@ class NoteList extends Component {
 
     return _.map(notes, note => {
       return (
-        <a
+        <div
           key={note.noteKey}
-          className="note-item card-content collection-item"
+          className="note-item collection-item"
           onClick={() => this.handleNoteSelect(note)}
         >
+          <button
+            className="btn-floating right"
+            onClick={() => this.handleNoteDelete(note)}
+          >
+            <i className="material-icons">delete</i>
+          </button>
           <h1 className="card-title">Title</h1>
           <div className="card-action">{note.body.blocks[0].text}</div>
+
           <p>{new Date(note.lastUpdated).toLocaleDateString()}</p>
-        </a>
+        </div>
       );
     });
   }
