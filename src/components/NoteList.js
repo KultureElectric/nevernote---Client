@@ -42,8 +42,10 @@ class NoteList extends Component {
           >
             <i className="material-icons">delete</i>
           </button>
-          <h1 className="card-title">Title</h1>
-          <div className="card-action">{note.body.blocks[0].text}</div>
+          <h1 className="card-title">{note.body.blocks[0].text}</h1>
+          <div className="card-action">
+            {note.body.blocks[1] ? note.body.blocks[1].text : ""}
+          </div>
 
           <p>{new Date(note.lastUpdated).toLocaleDateString()}</p>
         </div>
@@ -58,8 +60,8 @@ class NoteList extends Component {
   }
 }
 
-const mapStateToProps = ({ notes }) => {
-  return { notes };
+const mapStateToProps = ({ notes, activeNote }) => {
+  return { notes, activeNote };
 };
 
 export default connect(
