@@ -27,6 +27,5 @@ ReactDOM.render(
 // Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-// TODO: integrate title function
-// TODO: integrate that active note has different color in note lists
+// TODO: integrate that active note has different color in note lists -- maybe with styled components npm package
 // TODO: find a way that note isn't getting selected as current note when note will be deleted
