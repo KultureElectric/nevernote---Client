@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { EditorState, convertToRaw } from "draft-js";
 
 import NoteList from "./NoteList";
-import NoteEditor from "./NoteEditor";
+import NoteEditor from "./editorComponents/NoteEditor";
 
 import * as actions from "../actions";
 

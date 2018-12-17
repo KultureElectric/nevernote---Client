@@ -29,3 +29,5 @@ serviceWorker.unregister();
 
 // TODO: integrate that active note has different color in note lists -- maybe with styled components npm package
 // TODO: find a way that note isn't getting selected as current note when note will be deleted
+// TODO: Keep working on the EditorSide of things - https://github.com/facebook/draft-js/blob/master/examples/draft-0-10-0/rich/rich.html
+// TODO: Find a way to display two placeholders for first and second paragraph and make first paragraph (Title) to h1 property
